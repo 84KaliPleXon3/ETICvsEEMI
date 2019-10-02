@@ -1,5 +1,7 @@
 # api-directory
 
+Free API directory with search and filter features. This project allows you browse several APIs intended for web development, and find one that fit your needs.
+
 ## Project setup
 ```
 npm install
@@ -34,6 +36,3 @@ npm run test:e2e
 ```
 npm run test:unit
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
