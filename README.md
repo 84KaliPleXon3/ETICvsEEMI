@@ -1,38 +1,55 @@
-# api-directory
+# Eemiens vs Héticiens
 
-Free API directory with search and filter features. This project allows you browse several APIs intended for web development, and find one that fit your needs.
+Plus Eemien ou Héticien ? Le jeu qui ne fait pas rire les élèves.
 
 ## Project setup
+
+Launch REST API:
+
 ```
+cd server
 npm install
+npm start
 ```
 
-### Compiles and hot-reloads for development
+Start client:
+
+```
+cd client
+npm install
+npm run serve
+```
+
+Then you can browse the client at `http://localhost:8080/` and the API at `http://localhost:3000/`.
+
+### Client development
+
+#### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+#### Compiles and minifies for production
 ```
 npm run build
 ```
 
-### Run your tests
+#### Run your tests
 ```
 npm run test
 ```
 
-### Lints and fixes files
+#### Lints and fixes files
 ```
 npm run lint
 ```
 
-### Run your end-to-end tests
+#### Run your end-to-end tests
 ```
 npm run test:e2e
 ```
 
-### Run your unit tests
+#### Run your unit tests
 ```
 npm run test:unit
 ```
