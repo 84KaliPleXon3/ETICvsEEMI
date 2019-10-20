@@ -1,0 +1,21 @@
+{
+  "name": "HETICvsEEMI",
+  "version": "1.0.0",
+  "description": "Plus Eemien ou Héticien ? Le jeu qui ne fait pas rire les élèves.",
+  "main": "index.js",
+  "scripts": {
+    "install": "cd client && npm i && cd ../server && npm i && cd ..",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sundowndev/HETICvsEEMI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sundowndev/HETICvsEEMI/issues"
+  },
+  "homepage": "https://github.com/sundowndev/HETICvsEEMI#readme"
+}
