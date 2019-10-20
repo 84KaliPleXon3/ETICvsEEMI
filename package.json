@@ -4,8 +4,13 @@
   "description": "Plus Eemien ou Héticien ? Le jeu qui ne fait pas rire les élèves.",
   "main": "index.js",
   "scripts": {
-    "install": "cd client && npm i && cd ../server && npm i && cd ..",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install": "npm run server:install && npm run client:install",
+    "server:install": "cd server && npm i",
+    "client:install": "cd client && npm i",
+    "client:build": "cd client && npm build",
+    "client:lint": "cd client && npm run lint",
+    "client:test": "cd client && npm test",
+    "test": "npm run client:test"
   },
   "repository": {
     "type": "git",
