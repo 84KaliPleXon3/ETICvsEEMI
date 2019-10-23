@@ -1,11 +1,13 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
 import axios from 'axios';
 import IQuestion from '@/models/question';
+import { shuffleArray } from '@/utils';
+import { Module } from 'vuex';
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+const questions: Module<
+  { index: number; score: number; questions: IQuestion[] },
+  any
+> = {
+  namespaced: false,
   state: {
     index: 0,
     score: 0,
@@ -15,7 +17,7 @@ export default new Vuex.Store({
     async fetchQuestions(state): Promise<IQuestion[]> {
       try {
         const res = await axios.get('http://localhost:3000/questions');
-        return (state.questions = res.data.questions);
+        return (state.questions = shuffleArray(res.data.questions));
       } catch (e) {
         throw new Error(e);
       }
@@ -29,15 +31,19 @@ export default new Vuex.Store({
     questions(state): IQuestion[] {
       return state.questions;
     },
-    getQuestion(state) {
-      return state.questions[state.index];
+    currentQuestion(state): IQuestion | null {
+      return state.questions.length ? state.questions[state.index] : null;
+    },
+    checkAnswer(state) {
+      return ({ answer }: { answer: number }): boolean =>
+        state.questions[state.index].answer === answer;
     },
   },
   mutations: {
-    increaseIndex(state): number {
+    increaseIndex(state: { index: number }): number {
       return state.index++;
     },
-    increaseScore(state): number {
+    increaseScore(state: { score: number }): number {
       return state.score++;
     },
   },
@@ -49,4 +55,6 @@ export default new Vuex.Store({
       context.commit('increaseScore');
     },
   },
-});
+};
+
+export default questions;

@@ -1,9 +1,9 @@
-const shuffleArray = (arr: unknown[]): unknown[] => {
+const shuffleArray = (arr: unknown[]): any[] => {
   for (let i = arr.length - 1; i >= 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    const tmp = arr[i];
+    const k = arr[i];
     arr[i] = arr[j];
-    arr[j] = tmp;
+    arr[j] = k;
   }
 
   return arr;

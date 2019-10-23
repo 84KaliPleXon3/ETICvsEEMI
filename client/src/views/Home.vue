@@ -1,15 +1,17 @@
 <template>
   <div class="home">
-    <h1>HETIC vs EEMI</h1>
+    <div v-show="!finished">
+      <h1>HETIC vs EEMI</h1>
 
-    <h2>{{ getQuestion }}</h2>
-    <p>Plutôt HETIC ou EEMI ? ({{ index + 1 }}/{{ getQuestionCount }})</p>
+      <h2>{{ getQuestion.text }}</h2>
+      <p>Plus Éemien ou Héticien ? ({{ index + 1 }}/{{ getQuestionCount }})</p>
 
-    <span v-for="(choice) in choices" :key="choice.id">
-      <button @click="answer(choice.id)">{{ choice.name }}</button>
-    </span>
-    <hr />
-    Score: {{ score }}
+      <span v-for="(choice) in choices" :key="choice.id">
+        <button @click="answer(choice.id)">{{ choice.name }}</button>
+      </span>
+    </div>
+
+    <ScoreScreen v-show="finished" :score="score" :count="getQuestionCount" />
   </div>
 </template>
 
@@ -17,29 +19,31 @@
 import Vue from 'vue';
 import IQuestion from '../models/question';
 import { mapState, mapGetters, mapMutations } from 'vuex';
+import ScoreScreen from '../components/ScoreScreen.vue';
 
 export default Vue.extend({
   name: 'home',
   data() {
     return {
       choices: [{ id: 1, name: 'HETIC' }, { id: 2, name: 'EEMI' }],
+      finished: false,
     };
   },
   computed: {
-    ...mapGetters(['fetchQuestions', 'questions', 'index', 'score']),
+    ...mapGetters([
+      'fetchQuestions',
+      'questions',
+      'index',
+      'score',
+      'currentQuestion',
+      'checkAnswer',
+    ]),
     ...mapMutations(['increaseIndex', 'increaseScore']),
-    getQuestion(): IQuestion {
-      const index: number = this.$store.getters.index;
-      const questions: IQuestion[] = this.$store.getters.questions;
-
-      return questions.length > 0
-        ? this.$store.getters.questions[index].text
-        : null;
+    getQuestion(): IQuestion | {} {
+      return this.$store.getters.currentQuestion || {};
     },
     getQuestionCount(): number {
-      const questions: IQuestion[] = this.$store.getters.questions;
-
-      return questions.length > 0 ? questions.length : 0;
+      return this.$store.getters.questions.length;
     },
   },
   methods: {
@@ -47,19 +51,20 @@ export default Vue.extend({
       const index: number = this.$store.getters.index;
       const questions: IQuestion[] = this.$store.getters.questions;
 
-      if (questions[index].answer === answer) {
+      if (this.$store.getters.checkAnswer({ answer })) {
         this.$store.dispatch('increaseScore');
       }
 
       if (questions[index + 1]) {
         this.$store.dispatch('increaseIndex');
       } else {
-        // TODO: add score screen
-        console.log('Finish! Score:', this.$store.getters.score);
+        this.finished = true;
       }
     },
   },
-  components: {},
+  components: {
+    ScoreScreen,
+  },
   async created() {
     await this.$store.getters.fetchQuestions;
   },
