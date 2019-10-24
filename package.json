@@ -4,7 +4,7 @@
   "description": "Plus Eemien ou Héticien ? Le jeu qui ne fait pas rire les élèves.",
   "main": "index.js",
   "scripts": {
-    "install": "npm run server:install && npm run client:install",
+    "bootstrap": "lerna bootstrap",
     "server:install": "cd server && npm i",
     "client:install": "cd client && npm i",
     "client:build": "cd client && npm build",
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/sundowndev/HETICvsEEMI/issues"
   },
-  "homepage": "https://github.com/sundowndev/HETICvsEEMI#readme"
+  "homepage": "https://github.com/sundowndev/HETICvsEEMI#readme",
+  "devDependencies": {
+    "lerna": "^3.16.4"
+  }
 }
