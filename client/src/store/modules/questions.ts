@@ -11,17 +11,9 @@ const questions: Module<
   state: {
     index: 0,
     score: 0,
-    questions: [] as IQuestion[],
+    questions: [],
   },
   getters: {
-    async fetchQuestions(state): Promise<IQuestion[]> {
-      try {
-        const res = await axios.get('http://localhost:3000/questions');
-        return (state.questions = shuffleArray(res.data.questions));
-      } catch (e) {
-        throw new Error(e);
-      }
-    },
     index(state) {
       return state.index;
     },
@@ -40,6 +32,14 @@ const questions: Module<
     },
   },
   mutations: {
+    async fetchQuestions(state): Promise<IQuestion[]> {
+      try {
+        const res = await axios.get('http://localhost:3000/questions');
+        return (state.questions = shuffleArray(res.data.questions));
+      } catch (e) {
+        throw new Error(e);
+      }
+    },
     increaseIndex(state: { index: number }): number {
       return state.index++;
     },

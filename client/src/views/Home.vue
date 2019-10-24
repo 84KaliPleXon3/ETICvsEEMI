@@ -16,35 +16,34 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import IQuestion from '../models/question';
-import { mapState, mapGetters, mapMutations } from 'vuex';
-import ScoreScreen from '../components/ScoreScreen.vue';
+import Vue from "vue";
+import IQuestion from "../models/question";
+import { mapState, mapGetters, mapMutations } from "vuex";
+import ScoreScreen from "../components/ScoreScreen.vue";
 
 export default Vue.extend({
-  name: 'home',
+  name: "home",
   data() {
     return {
-      choices: [{ id: 1, name: 'HETIC' }, { id: 2, name: 'EEMI' }],
-      finished: false,
+      choices: [{ id: 1, name: "HETIC" }, { id: 2, name: "EEMI" }],
+      finished: false
     };
   },
   computed: {
     ...mapGetters([
-      'fetchQuestions',
-      'questions',
-      'index',
-      'score',
-      'currentQuestion',
-      'checkAnswer',
+      "questions",
+      "index",
+      "score",
+      "currentQuestion",
+      "checkAnswer"
     ]),
-    ...mapMutations(['increaseIndex', 'increaseScore']),
+    ...mapMutations(["fetchQuestions", "increaseIndex", "increaseScore"]),
     getQuestion(): IQuestion | {} {
       return this.$store.getters.currentQuestion || {};
     },
     getQuestionCount(): number {
       return this.$store.getters.questions.length;
-    },
+    }
   },
   methods: {
     answer(answer: number): void {
@@ -52,21 +51,21 @@ export default Vue.extend({
       const questions: IQuestion[] = this.$store.getters.questions;
 
       if (this.$store.getters.checkAnswer({ answer })) {
-        this.$store.dispatch('increaseScore');
+        this.$store.dispatch("increaseScore");
       }
 
       if (questions[index + 1]) {
-        this.$store.dispatch('increaseIndex');
+        this.$store.dispatch("increaseIndex");
       } else {
         this.finished = true;
       }
-    },
+    }
   },
   components: {
-    ScoreScreen,
+    ScoreScreen
   },
   async created() {
-    await this.$store.getters.fetchQuestions;
-  },
+    await this.fetchQuestions;
+  }
 });
 </script>
