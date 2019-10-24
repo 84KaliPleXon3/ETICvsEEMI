@@ -1,8 +1,20 @@
 {
   "questions": [
     {
-      "q": "Vous travaillez sur votre projet de visualisation de données durant la pause. Vous voudriez pouvoir y passer plus de temps, mais votre cours de team-building va commencer.",
-      "a": 1
+      "text": "Vous travaillez sur votre projet de visualisation de données durant la pause. Vous voudriez pouvoir y passer plus de temps, mais votre cours de team-building va commencer.",
+      "answer": 1
+    },
+    {
+      "text": "Le BDE de l'école organise une soirée de ouf. Ça se passe mercredi soir.",
+      "answer": 1
+    },
+    {
+      "text": "Vous sortez d'un week-end d'intégration aux Bahamas, après 6 heures de vol. Nico vous propose un petit \"after-WEI\" dans un bar proche de l'école.",
+      "answer": 2
+    },
+    {
+      "text": "Vous êtes en retard sur vos cours, vous vous demandez comment vous allez passer le prochain partiel. Soudain, votre intervenant vous propose de venir dîner chez lui pour en discuter.",
+      "answer": 1
     }
   ]
 }
