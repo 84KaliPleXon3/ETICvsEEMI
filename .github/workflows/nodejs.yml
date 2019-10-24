@@ -19,15 +19,11 @@ jobs:
         node-version: ${{ matrix.node-version }}
       env:
         CI: true
-
     - name: Lint & build
       run: |
-        set -o pipefail
-        npm ci
         npm run bootstrap
         npm run client:lint
         npm run build
-
     - name: Test
       run: |
         npm test
