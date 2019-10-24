@@ -20,21 +20,14 @@ jobs:
       env:
         CI: true
 
-    - name: Install
+    - name: Lint & build
       run: |
-        cd ./client
         set -o pipefail
         npm ci
-        npm install
-
-    - name: lint
-      run: |
-        npm run lint
-
-    - name: build
-      run: |
+        npm run bootstrap
+        npm run client:lint
         npm run build
 
-    - name: test
+    - name: Test
       run: |
         npm test
