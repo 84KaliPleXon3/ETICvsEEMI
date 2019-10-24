@@ -16,11 +16,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-      env:
-        CI: true
     - name: Lint & build
       run: |
-        set -o pipefail
         npm install
         npm run bootstrap
         npm run client:lint
