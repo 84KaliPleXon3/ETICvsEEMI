@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -21,6 +20,8 @@ jobs:
         CI: true
     - name: Lint & build
       run: |
+        set -o pipefail
+        npm install
         npm run bootstrap
         npm run client:lint
         npm run build
