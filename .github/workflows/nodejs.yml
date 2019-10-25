@@ -16,12 +16,15 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Lint & build
+    - name: Install & lint
       run: |
+        npm install -g lerna
         npm install
         npm run bootstrap
-        npm run client:lint
-        npm run build
+        lerna run lint
+    - name: Build
+      run: |
+        lerna run build
     - name: Test
       run: |
-        npm test
+        lerna run test
