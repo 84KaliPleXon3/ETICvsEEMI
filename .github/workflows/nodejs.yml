@@ -1,0 +1,30 @@
+name: Client CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [8.x, 12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install & lint
+      run: |
+        npm install -g lerna
+        npm install
+        npm run bootstrap
+        lerna run lint
+    - name: Build
+      run: |
+        lerna run build
+    - name: Test
+      run: |
+        lerna run test
