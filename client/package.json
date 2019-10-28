@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "npm run test:unit && npm run test:e2e -- --headless",
+    "test": "npm run test:unit && node ../server & wait-on http://localhost:3000/ && npm run test:e2e -- --headless",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit"
   },
@@ -33,6 +33,7 @@
     "ts-jest": "^23.0.0",
     "tslint": "^5.20.0",
     "typescript": "^3.4.3",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "wait-on": "^3.3.0"
   }
 }
