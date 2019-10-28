@@ -1,26 +1,41 @@
-# Eemiens vs Héticiens
+# HÉTIC vs EEMI
 
 Plus Eemien ou Héticien ? Le jeu qui ne fait pas rire les élèves.
 
 ## Project setup
 
-Launch REST API:
+Clone repository
 
 ```
-cd server
+git clone https://github.com/sundowndev/HETICvsEEMI
+```
+
+Install core dependencies
+
+```
 npm install
-npm start
+npm run bootstrap
 ```
 
-Start client:
+Launch REST API
 
 ```
-cd client
-npm install
+node server
+```
+
+Start client
+
+```
+cd client/
 npm run serve
 ```
 
 Then you can browse the client at `http://localhost:8080/` and the API at `http://localhost:3000/`.
+
+### API routes
+
+- **/questions** returns an array of questions
+- **/schools** returns an array of schools
 
 ### Client development
 
