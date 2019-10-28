@@ -1,5 +1,17 @@
 describe("Home page", () => {
   it("should have content displayed", () => {
+    cy.server({ status: 200 });
+    cy.route("/schools", {
+      schools: [
+        { id: 1, name: "school1" },
+        { id: 2, name: "school2" },
+        { id: 3, name: "school3" }
+      ]
+    });
+    cy.route("/questions", {
+      questions: [{ text: "test_cypress", answer: 2 }]
+    });
+
     cy.visit("/");
 
     // Elements are visible
@@ -15,11 +27,17 @@ describe("Home page", () => {
     cy.contains("#title", "HETIC vs EEMI");
     cy.get("h2#question_text").should("not.be.empty");
     cy.contains("p", "Plus Éemien ou Héticien ?");
-    cy.get(".choice-btn").should("have.length", 2);
+    cy.get(".choice-btn").should("have.length", 3);
+    cy.get(".choice-btn")
+      .first()
+      .should("have.text", "school1");
   });
 
   it("should finish game with score 0", () => {
     cy.server({ status: 200 });
+    cy.route("/schools", {
+      schools: [{ id: 1, name: "school1" }, { id: 2, name: "school2" }]
+    });
     cy.route("/questions", {
       questions: [{ text: "test_cypress", answer: 2 }]
     });
@@ -42,6 +60,9 @@ describe("Home page", () => {
 
   it("should finish game with score 1 and retry", () => {
     cy.server({ status: 200 });
+    cy.route("/schools", {
+      schools: [{ id: 1, name: "school1" }, { id: 2, name: "school2" }]
+    });
     cy.route("/questions", {
       questions: [{ text: "test_cypress", answer: 1 }]
     });
