@@ -1,17 +1,15 @@
 <template>
   <div class="home">
-    <div v-show="!finished">
-      <h1>HETIC vs EEMI</h1>
-
-      <h2>{{ currentQuestion.text }}</h2>
-      <p>Plus Éemien ou Héticien ? ({{ index + 1 }}/{{ questions.length }})</p>
+    <div id="quizz_input" v-show="!finished">
+      <h2 id="question_text">{{ currentQuestion.text }}</h2>
+      <p>Plus Éemien ou Héticien ? <span class="progress">({{ index + 1 }}/{{ questions.length }})</span></p>
 
       <span v-for="(choice) in schools" :key="choice.id">
-        <button @click="answer(choice.id)">{{ choice.name }}</button>
+        <button class="choice-btn" @click="answer(choice.id)">{{ choice.name }}</button>
       </span>
     </div>
 
-    <ScoreScreen v-show="finished" :score="score" :count="questions.length" :reset="resetGame" />
+    <ScoreScreen v-show="finished" :reset="resetGame" />
   </div>
 </template>
 
@@ -29,7 +27,7 @@ export default Vue.extend({
     };
   },
   computed: {
-    ...mapState(['index', 'score', 'questions']),
+    ...mapState(['index', 'score', 'questions', 'schools']),
     ...mapGetters([
       'questions',
       'schools',

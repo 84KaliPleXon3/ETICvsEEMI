@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <h1 id="title">HETIC vs EEMI</h1>
+
     <router-view />
   </div>
 </template>
