@@ -15,6 +15,10 @@
     {
       "text": "Vous êtes en retard sur vos cours, vous vous demandez comment vous allez passer le prochain partiel. Soudain, votre intervenant vous propose de venir dîner chez lui pour en discuter.",
       "answer": 1
+    },
+    {
+      "text": "Votre intervenant vous confie un projet Swift à terminer. Vous avez 3 semaines, une banane et une ampoule.",
+      "answer": 2
     }
   ]
 }
