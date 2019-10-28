@@ -2,7 +2,7 @@
   <div class="score_screen">
     <h1>Score: {{ score }}/{{ count }}</h1>
     <h3>{{ text() }}</h3>
-    <button @click="reset">Rejouer</button>
+    <button class="replay-btn" @click="reset">Rejouer</button>
   </div>
 </template>
 
