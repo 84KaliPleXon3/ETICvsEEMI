@@ -9,7 +9,7 @@
       "answer": 1
     },
     {
-      "text": "Vous sortez d'un week-end d'intégration aux Bahamas, après 6 heures de vol. Nico vous propose un petit \"after-WEI\" dans un bar proche de l'école.",
+      "text": "Vous sortez d'un week-end d'intégration aux Bahamas. Après 6 heures de vol, Nico vous propose un petit \"after-WEI\" dans un bar proche de l'école.",
       "answer": 2
     },
     {
@@ -18,6 +18,10 @@
     },
     {
       "text": "Votre intervenant vous confie un projet Swift à terminer. Vous avez 3 semaines, une banane et une ampoule.",
+      "answer": 2
+    },
+    {
+      "text": "Vous souhaitez utiliser les ordinateurs mis à disposition par l'école. Problème, un autre ordinateur utilise la même adresse IP sur le réseau.",
       "answer": 2
     }
   ]
