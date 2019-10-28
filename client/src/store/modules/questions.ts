@@ -2,10 +2,10 @@ import axios from 'axios';
 import IQuestion from '@/models/question';
 import { shuffleArray } from '@/utils';
 import { Module } from 'vuex';
-import ISchool from '@/models/school';
+import config from '@/config';
 
 const questions: Module<
-  { index: number; score: number; questions: IQuestion[]; schools: ISchool[] },
+  { index: number; score: number; questions: IQuestion[] },
   any
 > = {
   namespaced: false,
@@ -13,7 +13,6 @@ const questions: Module<
     index: 0,
     score: 0,
     questions: [],
-    schools: [],
   },
   getters: {
     index(state) {
@@ -25,9 +24,7 @@ const questions: Module<
     questions(state): IQuestion[] {
       return state.questions;
     },
-    schools(state): ISchool[] {
-      return state.schools;
-    },
+
     currentQuestion(state): IQuestion | {} {
       return state.questions.length ? state.questions[state.index] : {};
     },
@@ -43,9 +40,7 @@ const questions: Module<
     setQuestions(state, payload): IQuestion[] {
       return (state.questions = payload);
     },
-    setSchools(state, payload): ISchool[] {
-      return (state.schools = payload);
-    },
+
     increaseIndex(state: { index: number }): number {
       return state.index++;
     },
@@ -67,16 +62,10 @@ const questions: Module<
       context.commit('increaseScore');
     },
     async fetchQuestions(context): Promise<void> {
-      const res = await axios.get('http://localhost:3000/questions');
+      const res = await axios.get(`${config.apiUrl}/questions`);
       const payload = shuffleArray(res.data.questions);
 
       context.commit('setQuestions', payload);
-    },
-    async fetchSchools(context): Promise<void> {
-      const res = await axios.get('http://localhost:3000/schools');
-      const schools = shuffleArray(res.data.schools);
-
-      context.commit('setSchools', schools);
     },
     resetState(context): void {
       context.commit('resetState');
