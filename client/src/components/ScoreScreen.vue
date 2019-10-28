@@ -1,8 +1,8 @@
 <template>
   <div class="score_screen">
     <h1>Score: {{ score }}/{{ count }}</h1>
-    <h3>Bon c'est pas tip top tout ça</h3>
-    <button>Rejouer</button>
+    <h3>{{ text() }}</h3>
+    <button @click="reset">Rejouer</button>
   </div>
 </template>
 
@@ -13,13 +13,25 @@ export default Vue.extend({
   name: 'ScoreScreen',
   data() {
     return {
-      messages: [{ min: 2, msg: 'Bon c\'est pas tip top tout ça' }],
+      messages: [
+        { max: 3, msg: 'Bon bah c\'est pas tip top tout ça.' },
+        { max: this.count, msg: 'Bravo! Un vrai pro du secteur de la tech school.' },
+      ],
     };
   },
   props: {
     score: Number,
     count: Number,
+    reset: Function,
   },
+  methods: {
+    text() {
+      const text =  this.messages.find((msg) => this.score <= msg.max);
+
+      return text !== undefined ? text.msg : '';
+    },
+  },
+
 });
 </script>
 
