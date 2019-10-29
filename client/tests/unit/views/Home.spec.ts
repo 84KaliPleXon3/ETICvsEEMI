@@ -1,9 +1,9 @@
-import { createLocalVue, shallowMount } from "@vue/test-utils";
-import Vuex from "vuex";
-import Home from "../../../src/views/Home.vue";
-import axios from "axios";
-import config from "@/config";
-import IQuestion from "@/models/question";
+import { createLocalVue, shallowMount } from '@vue/test-utils';
+import Vuex from 'vuex';
+import Home from '../../../src/views/Home.vue';
+import axios from 'axios';
+// import config from '@/config';
+import IQuestion from '@/models/question';
 
 const localVue = createLocalVue();
 
@@ -16,39 +16,43 @@ const $store = new Vuex.Store({
       state: {
         index: 0,
         score: 0,
-        question: []
+        question: [],
       },
       getters: {
         index: () => 0,
         score: () => 0,
         schools: () => [],
         currentQuestion: (): IQuestion => {
-          return { text: "test", answer: 1 };
+          return { text: 'test', answer: 1 };
         },
         questions: (): IQuestion[] => {
           return [];
-        }
+        },
       },
       actions: {
-        fetchQuestions: () => {},
-        fetchSchools: () => {}
-      }
-    }
-  }
+        fetchQuestions: () => {
+          return;
+        },
+        fetchSchools: () => {
+          return;
+        },
+      },
+    },
+  },
 });
 shallowMount(Home, { mocks: { $store } });
 
-describe("Views - Home", () => {
-  it("should remove done todos", () => {
-    const storeDispatchMock = spyOn($store, "dispatch");
+describe('Views - Home', () => {
+  it('should remove done todos', () => {
+    const storeDispatchMock = spyOn($store, 'dispatch');
     const axiosMock = jest
-      .spyOn(axios, "get")
+      .spyOn(axios, 'get')
       .mockResolvedValue({ data: { questions: [] } } as any);
 
     // wrapper.find('.todoList__removeDone').trigger('click');
     expect(storeDispatchMock).toBeCalledTimes(2);
-    expect(storeDispatchMock).toHaveBeenNthCalledWith(1, "fetchQuestions");
-    expect(storeDispatchMock).toHaveBeenNthCalledWith(2, "fetchSchools");
+    expect(storeDispatchMock).toHaveBeenNthCalledWith(1, 'fetchQuestions');
+    expect(storeDispatchMock).toHaveBeenNthCalledWith(2, 'fetchSchools');
     // expect(axiosMock).toBeCalledTimes(1);
     // expect(axiosMock).toHaveBeenCalledWith(`${config.apiUrl}/questions`);
   });
