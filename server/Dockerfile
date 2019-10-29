@@ -4,7 +4,7 @@ WORKDIR /api
 
 COPY ./package-lock.json .
 COPY ./package.json .
-COPY ./server ./server
+COPY . .
 
 # Build
 RUN npm install --prefix /api
