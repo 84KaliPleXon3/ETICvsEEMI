@@ -42,7 +42,7 @@ const $store = new Vuex.Store({
 });
 shallowMount(Home, { mocks: { $store } });
 
-describe('Views - Home', () => {
+describe.skip('Views - Home', () => {
   it('should remove done todos', () => {
     const storeDispatchMock = spyOn($store, 'dispatch');
     const axiosMock = jest
