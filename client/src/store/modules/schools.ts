@@ -4,7 +4,11 @@ import { Module } from 'vuex';
 import ISchool from '@/models/school';
 import config from '@/config';
 
-const schools: Module<{ schools: ISchool[] }, any> = {
+export interface IStoreSchools {
+  schools: ISchool[];
+}
+
+const schools: Module<IStoreSchools, any> = {
   namespaced: false,
   state: {
     schools: [],

@@ -27,4 +27,4 @@ jobs:
         lerna run build
     - name: Test
       run: |
-        lerna run test
+        npm run client:test
