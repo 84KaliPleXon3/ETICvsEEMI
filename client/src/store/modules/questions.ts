@@ -4,8 +4,14 @@ import { shuffleArray } from '@/utils';
 import { Module } from 'vuex';
 import config from '@/config';
 
+export interface IStoreQuestions {
+  index: number;
+  score: number;
+  questions: IQuestion[];
+}
+
 const questions: Module<
-  { index: number; score: number; questions: IQuestion[] },
+IStoreQuestions,
   any
 > = {
   namespaced: false,
@@ -15,16 +21,15 @@ const questions: Module<
     questions: [],
   },
   getters: {
-    index(state) {
+    index(state): number {
       return state.index;
     },
-    score(state) {
+    score(state): number {
       return state.score;
     },
     questions(state): IQuestion[] {
       return state.questions;
     },
-
     currentQuestion(state): IQuestion | {} {
       return state.questions.length ? state.questions[state.index] : {};
     },
@@ -40,11 +45,10 @@ const questions: Module<
     setQuestions(state, payload): IQuestion[] {
       return (state.questions = payload);
     },
-
-    increaseIndex(state: { index: number }): number {
+    increaseIndex(state): number {
       return state.index++;
     },
-    increaseScore(state: { score: number }): number {
+    increaseScore(state): number {
       return state.score++;
     },
     resetState(state) {
