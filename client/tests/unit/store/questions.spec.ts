@@ -1,10 +1,13 @@
-import { MutationTree, GetterTree } from 'vuex';
+import { MutationTree, GetterTree, ActionTree } from 'vuex';
 import questions, {
   IStoreQuestions,
 } from '../../../src/store/modules/questions';
+import axios from 'axios';
+import config from '@/config';
 
 const getters = questions.getters as GetterTree<IStoreQuestions, any>;
 const mutations = questions.mutations as MutationTree<IStoreQuestions>;
+const actions = questions.actions as any;
 
 let state: IStoreQuestions;
 
@@ -157,6 +160,59 @@ describe('Store - Questions', () => {
 
         expect(state.index).toEqual(0);
         expect(state.score).toEqual(0);
+      });
+    });
+  });
+
+  describe('Actions', () => {
+    describe('#increaseIndex', () => {
+      it('should commit increaseIndex', async () => {
+        const commitMock = jest.fn();
+
+        await actions.increaseIndex({ commit: commitMock });
+
+        expect(commitMock).toBeCalledTimes(1);
+        expect(commitMock).toHaveBeenCalledWith('increaseIndex');
+      });
+    });
+
+    describe('#increaseScore', () => {
+      it('should commit increaseScore', async () => {
+        const commitMock = jest.fn();
+
+        await actions.increaseScore({ commit: commitMock });
+
+        expect(commitMock).toBeCalledTimes(1);
+        expect(commitMock).toHaveBeenCalledWith('increaseScore');
+      });
+    });
+
+    describe('#fetchQuestions', () => {
+      it('should fetch questions from API', async () => {
+        const payload = [{ id: '2', name: 'test' }];
+        const axiosMock = jest.spyOn(axios, 'get').mockResolvedValue({
+          data: { questions: payload },
+        } as any);
+        const commitMock = jest.fn();
+
+        await actions.fetchQuestions({ commit: commitMock });
+
+        expect(axiosMock).toBeCalledTimes(1);
+        expect(axiosMock).toHaveBeenCalledWith(`${config.apiUrl}/questions`);
+
+        expect(commitMock).toBeCalledTimes(1);
+        expect(commitMock).toHaveBeenCalledWith('setQuestions', payload);
+      });
+    });
+
+    describe('#resetState', () => {
+      it('should commit resetState', async () => {
+        const commitMock = jest.fn();
+
+        await actions.resetState({ commit: commitMock });
+
+        expect(commitMock).toBeCalledTimes(1);
+        expect(commitMock).toHaveBeenCalledWith('resetState');
       });
     });
   });
