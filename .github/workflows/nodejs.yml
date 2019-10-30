@@ -28,3 +28,11 @@ jobs:
     - name: Test
       run: |
         npm run client:test
+
+    - name: Upload coverage to Codecov  
+      uses: codecov/codecov-action@v1.0.2
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./client/coverage/coverage-final.json
+        flags: unittests
+        name: codecov-umbrella 
