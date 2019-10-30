@@ -1,5 +1,8 @@
 # HÉTIC vs EEMI
 
+[![](https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/sundowndev/HETICvsEEMI/badge?ref=master)](https://github.com/sundowndev/HETICvsEEMI/actions)
+[![](https://codecov.io/gh/sundowndev/HETICvsEEMI/branch/master/graph/badge.svg)](https://codecov.io/gh/sundowndev/HETICvsEEMI)
+
 Plus Eemien ou Héticien ? Le jeu qui ne fait pas rire les élèves.
 
 ## Project setup
