@@ -9,7 +9,7 @@ export interface IStoreSchools {
 }
 
 const schools: Module<IStoreSchools, any> = {
-  namespaced: false,
+  namespaced: true,
   state: {
     schools: [],
   },

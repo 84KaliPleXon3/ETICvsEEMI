@@ -26,20 +26,15 @@ export default Vue.extend({
     reset: Function,
   },
   computed: {
-    ...mapState(['score', 'questions']),
-    ...mapGetters([
-      'questions',
-      'score',
-    ]),
+    ...mapGetters('questions', ['questions', 'score']),
   },
   methods: {
     text() {
-      const text =  this.messages.filter((msg) => this.score >= msg.min).pop();
+      const text = this.messages.filter((msg) => this.score >= msg.min);
 
-      return text !== undefined ? text.msg : '';
+      return text[0] !== undefined ? text[0].msg : '';
     },
   },
-
 });
 </script>
 

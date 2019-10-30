@@ -2,7 +2,10 @@
   <div class="home">
     <div id="quizz_input" v-show="!finished">
       <h2 id="question_text">{{ currentQuestion.text }}</h2>
-      <p>Plus Éemien ou Héticien ? <span class="progress">({{ index + 1 }}/{{ questions.length }})</span></p>
+      <p>
+        Plus Éemien ou Héticien ?
+        <span class="progress">({{ index + 1 }}/{{ questions.length }})</span>
+      </p>
 
       <span v-for="(choice) in schools" :key="choice.id">
         <button class="choice-btn" @click="answer(choice.id)">{{ choice.name }}</button>
@@ -27,17 +30,15 @@ export default Vue.extend({
     };
   },
   computed: {
-    ...mapState(['index', 'score', 'questions', 'schools']),
-    ...mapGetters([
+    ...mapGetters('schools', ['schools']),
+    ...mapGetters('questions', [
       'questions',
-      'schools',
       'index',
       'score',
       'currentQuestion',
       'checkAnswer',
       'isLastQuestion',
     ]),
-    ...mapMutations(['fetchQuestions', 'increaseIndex', 'increaseScore']),
   },
   methods: {
     answer(answer: number): void {
@@ -45,26 +46,26 @@ export default Vue.extend({
       const questions: IQuestion[] = this.questions;
 
       if (this.checkAnswer({ answer })) {
-        this.$store.dispatch('increaseScore');
+        this.$store.dispatch('questions/increaseScore');
       }
 
       if (!this.isLastQuestion) {
-        this.$store.dispatch('increaseIndex');
+        this.$store.dispatch('questions/increaseIndex');
       } else {
         this.finished = true;
       }
     },
     resetGame(): void {
       this.finished = false;
-      this.$store.dispatch('resetState');
+      this.$store.dispatch('questions/resetState');
     },
   },
   components: {
     ScoreScreen,
   },
   async created() {
-    await this.$store.dispatch('fetchQuestions');
-    await this.$store.dispatch('fetchSchools');
+    await this.$store.dispatch('questions/fetchQuestions');
+    await this.$store.dispatch('schools/fetchSchools');
   },
 });
 </script>

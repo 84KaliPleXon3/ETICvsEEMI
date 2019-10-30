@@ -14,7 +14,7 @@ const questions: Module<
 IStoreQuestions,
   any
 > = {
-  namespaced: false,
+  namespaced: true,
   state: {
     index: 0,
     score: 0,
