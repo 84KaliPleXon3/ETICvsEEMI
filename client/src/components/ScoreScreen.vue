@@ -35,6 +35,9 @@ export default Vue.extend({
       return text[0] !== undefined ? text[0].msg : '';
     },
   },
+  created() {
+    this.messages.sort((a, b) => b.min - a.min);
+  },
 });
 </script>
 
