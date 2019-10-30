@@ -76,7 +76,7 @@ describe("Home page", () => {
       .click();
 
     cy.contains("Score: 1/1");
-    cy.contains("T'as pas lu les questions avoues.");
+    cy.contains("Bon bah c'est pas tip top tout ça.");
     cy.contains("Recommencer");
 
     cy.get("#quizz_input").should("not.be.visible"); // Quizz is hidden
