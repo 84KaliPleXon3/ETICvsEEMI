@@ -76,7 +76,7 @@ describe("Home page", () => {
       .click();
 
     cy.contains("Score: 1/1");
-    cy.contains("Bon bah c'est pas tip top tout ça.");
+    cy.contains("T'as pas lu les questions avoues.");
     cy.contains("Recommencer");
 
     cy.get("#quizz_input").should("not.be.visible"); // Quizz is hidden
@@ -84,7 +84,7 @@ describe("Home page", () => {
 
     cy.get(".replay-btn").click();
 
-    cy.get("#quizz_input").should("be.visible");
-    cy.get("#score_screen").should("not.be.visible");
+    cy.get("#quizz_input").should("be.visible"); // Quizz is visible
+    cy.get("#score_screen").should("not.be.visible"); // Score screen is hidden
   });
 });
