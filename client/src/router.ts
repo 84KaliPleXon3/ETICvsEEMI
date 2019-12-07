@@ -15,7 +15,7 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/score-screen',
+      path: '/end',
       name: 'scoreScreen',
       component: ScoreScreen,
     },
