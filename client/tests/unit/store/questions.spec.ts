@@ -51,7 +51,7 @@ describe('Store - Questions', () => {
           state,
           null,
           null,
-          null
+          null,
         )({
           answer: 1,
         });
@@ -66,7 +66,7 @@ describe('Store - Questions', () => {
           state,
           null,
           null,
-          null
+          null,
         )({
           answer: 1,
         });
