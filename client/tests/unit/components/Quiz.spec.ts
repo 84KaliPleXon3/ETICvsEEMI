@@ -46,8 +46,9 @@ describe('Component - ScoreScreen', () => {
     expect(wrapper.find('span.progress').text()).toBe('(1/1)');
   });
 
+  // Errored :(
   it.skip('should call reset state function', () => {
-    wrapper.find('span button').trigger('click');
+    wrapper.find('.choice-btn').trigger('click');
 
     expect(resetMock).toBeCalledTimes(1);
   });
