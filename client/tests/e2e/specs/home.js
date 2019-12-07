@@ -1,40 +1,54 @@
 describe('Home page', () => {
-  it('should have content displayed', () => {
-    cy.server({ status: 200 });
-    cy.route('/schools', {
-      schools: [
-        { id: 1, name: 'school1' },
-        { id: 2, name: 'school2' },
-        { id: 3, name: 'school3' },
-      ],
-    });
-    cy.route('/questions', {
-      questions: [{ text: 'test_cypress', answer: 2 }],
+  describe('content', () => {
+    it('should display quizz component', () => {
+      cy.get('#quizz_input').should('be.visible');
     });
 
-    cy.visit('/');
+    it('should display title', () => {
+      cy.get('h1#title').should('be.visible');
+      cy.contains('h1#title', 'HETIC vs EEMI');
+    });
 
-    // Elements are visible
-    cy.get('h1#title').should('be.visible');
-    cy.get('h2#question_text').should('be.visible');
-    cy.get('span.progress').should('be.visible');
-    cy.get('p').should('be.visible');
-    cy.get('.choice-btn').should('be.visible');
-    cy.get('#quizz_input').should('be.visible');
-    cy.get('#score_screen').should('not.be.visible');
+    it('should display progress', () => {
+      cy.get('span.progress').should('be.visible');
+      cy.contains('span.progress', '1/2');
+    });
 
-    // Elements contain right content
-    cy.contains('#title', 'HETIC vs EEMI');
-    cy.get('h2#question_text').should('not.be.empty');
-    cy.contains('p', 'Plus Éemien ou Héticien ?');
-    cy.get('.choice-btn').should('have.length', 3);
-    cy.get('.choice-btn')
-      .first()
-      .should('have.text', 'school1');
+    it('should display choice text', () => {
+      cy.get('p').should('be.visible');
+      cy.contains('p', 'Plus Éemien ou Héticien ?');
+    });
+
+    it('should display question', () => {
+      cy.server();
+      cy.route('/questions', {
+        questions: [{ text: 'test_cypress', answer: 2 }],
+      });
+
+      cy.get('h2#question_text').should('be.visible');
+      cy.contains('h2#question_text', 'test_cypress');
+    });
+
+    it('should display schools', () => {
+      cy.server();
+      cy.route('/schools', {
+        schools: [
+          { id: 1, name: 'school1' },
+          { id: 2, name: 'school2' },
+          { id: 3, name: 'school3' },
+        ],
+      });
+
+      cy.get('.choice-btn').should('be.visible');
+      cy.get('.choice-btn').should('have.length', 2);
+      cy.get('.choice-btn')
+        .first()
+        .should('have.text', 'school1');
+    });
   });
 
   it('should finish game with score 0', () => {
-    cy.server({ status: 200 });
+    cy.server();
     cy.route('/schools', {
       schools: [
         { id: 1, name: 'school1' },
@@ -59,6 +73,10 @@ describe('Home page', () => {
     cy.get('.choice-btn')
       .first()
       .click();
+
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq('/end');
+    });
 
     cy.contains('Score: 0/2');
     cy.contains("T'as pas lu les questions avoues.");
@@ -69,7 +87,7 @@ describe('Home page', () => {
   });
 
   it('should finish game with score 1 and retry', () => {
-    cy.server({ status: 200 });
+    cy.server();
     cy.route('/schools', {
       schools: [
         { id: 1, name: 'school1' },
@@ -94,6 +112,10 @@ describe('Home page', () => {
     cy.get('.choice-btn')
       .first()
       .click();
+
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq('/end');
+    });
 
     cy.contains('Score: 2/2');
     cy.contains("Bon bah c'est pas tip top tout ça.");
