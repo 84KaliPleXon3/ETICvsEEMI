@@ -1,5 +1,5 @@
 {
-  "name": "HETICvsEEMI",
+  "name": "hetic-vs-eemi",
   "version": "1.0.0",
   "description": "Plus Eemien ou Héticien ? Le jeu qui ne fait pas rire les élèves.",
   "main": "index.js",
@@ -16,8 +16,6 @@
     "type": "git",
     "url": "git+https://github.com/sundowndev/HETICvsEEMI.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/sundowndev/HETICvsEEMI/issues"
