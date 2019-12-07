@@ -21,36 +21,6 @@ describe('Store - Questions', () => {
   });
 
   describe('Getters', () => {
-    describe('#index', () => {
-      it('should get index', () => {
-        state.index = 5;
-
-        const index = getters.index(state, null, null, null);
-
-        expect(index).toEqual(5);
-      });
-    });
-
-    describe('#score', () => {
-      it('should get score', () => {
-        state.score = 5;
-
-        const score = getters.score(state, null, null, null);
-
-        expect(score).toEqual(5);
-      });
-    });
-
-    describe('#questions', () => {
-      it('should get questions', () => {
-        state.questions = [{ text: 'test', answer: 1 }];
-
-        const data = getters.questions(state, null, null, null);
-
-        expect(data).toStrictEqual(state.questions);
-      });
-    });
-
     describe('#currentQuestion', () => {
       it('should get current question', () => {
         state.index = 1;
@@ -77,7 +47,12 @@ describe('Store - Questions', () => {
       it('should check answer and get true', () => {
         state.questions = [{ text: 'test', answer: 1 }];
 
-        const isCorrect = getters.checkAnswer(state, null, null, null)({
+        const isCorrect = getters.checkAnswer(
+          state,
+          null,
+          null,
+          null,
+        )({
           answer: 1,
         });
 
@@ -87,7 +62,12 @@ describe('Store - Questions', () => {
       it('should check answer and get false', () => {
         state.questions = [{ text: 'test', answer: 2 }];
 
-        const isCorrect = getters.checkAnswer(state, null, null, null)({
+        const isCorrect = getters.checkAnswer(
+          state,
+          null,
+          null,
+          null,
+        )({
           answer: 1,
         });
 

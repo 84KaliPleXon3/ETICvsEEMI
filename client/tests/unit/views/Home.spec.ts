@@ -4,7 +4,7 @@ import Home from '../../../src/views/Home.vue';
 import axios from 'axios';
 import config from '@/config';
 import questions from '@/store/modules/questions';
-import schools from '@/store/modules/questions';
+import schools from '@/store/modules/schools';
 
 const localVue = createLocalVue();
 
@@ -18,17 +18,13 @@ const $store = new Vuex.Store({
 });
 const axiosMock = jest
   .spyOn(axios, 'get')
-  .mockResolvedValue({ data: { questions: [] } } as any);
-const wrapper = shallowMount(Home, { mocks: { $store } });
+  .mockResolvedValueOnce({ data: { questions: [] } } as any)
+  .mockResolvedValueOnce({ data: { schools: [] } } as any);
 
-describe.skip('Views - Home', () => {
-  it('should ', () => {
-    const storeDispatchMock = spyOn($store, 'dispatch');
+shallowMount(Home, { mocks: { $store } });
 
-    // wrapper.find('.todoList__removeDone').trigger('click');
-    // expect(storeDispatchMock).toBeCalledTimes(2);
-    // expect(storeDispatchMock).toHaveBeenNthCalledWith(1, 'fetchQuestions');
-    // expect(storeDispatchMock).toHaveBeenNthCalledWith(2, 'fetchSchools');
+describe('Views - Home', () => {
+  it('should fetch questions and shools', () => {
     expect(axiosMock).toBeCalledTimes(2);
     expect(axiosMock).toHaveBeenNthCalledWith(1, `${config.apiUrl}/questions`);
     expect(axiosMock).toHaveBeenNthCalledWith(2, `${config.apiUrl}/schools`);

@@ -21,15 +21,6 @@ IStoreQuestions,
     questions: [],
   },
   getters: {
-    index(state): number {
-      return state.index;
-    },
-    score(state): number {
-      return state.score;
-    },
-    questions(state): IQuestion[] {
-      return state.questions;
-    },
     currentQuestion(state): IQuestion | {} {
       return state.questions.length ? state.questions[state.index] : {};
     },
