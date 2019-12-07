@@ -6,8 +6,8 @@
       <span class="progress">({{ index + 1 }}/{{ questions.length }})</span>
     </p>
 
-    <span v-for="(choice) in schools" :key="choice.id">
-      <button class="choice-btn" @click="answer(choice.id)">{{ choice.name }}</button>
+    <span>
+      <button v-for="(choice) in schools" :key="choice.id" class="choice-btn" @click="answer(choice.id)">{{ choice.name }}</button>
     </span>
   </div>
 </template>
