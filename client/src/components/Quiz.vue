@@ -31,7 +31,7 @@ export default Vue.extend({
       'checkAnswer',
       'isLastQuestion',
     ]),
-    ...mapGetters('schools', ['schools']),
+    ...mapState('schools', ['schools']),
   },
   methods: {
     answer(answer: number): void {

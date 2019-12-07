@@ -13,11 +13,7 @@ const schools: Module<IStoreSchools, any> = {
   state: {
     schools: [],
   },
-  getters: {
-    schools(state): ISchool[] {
-      return state.schools;
-    },
-  },
+  getters: {},
   mutations: {
     setSchools(state, payload): ISchool[] {
       return (state.schools = payload);

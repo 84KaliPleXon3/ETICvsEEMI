@@ -16,19 +16,6 @@ describe('Store - Questions', () => {
     };
   });
 
-  describe('Getters', () => {
-    describe('#schools', () => {
-      it('should get schools', () => {
-        state.schools = [{ id: '1', name: 'test' }, { id: '2', name: 'test2' }];
-
-        const data = getters.schools(state, null, null, null);
-
-        expect(data).toStrictEqual(state.schools);
-        expect(data.length).toBe(2);
-      });
-    });
-  });
-
   describe('Mutations', () => {
     describe('#setSchools', () => {
       it('should set schools state', () => {
