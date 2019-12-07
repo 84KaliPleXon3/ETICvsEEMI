@@ -7,23 +7,24 @@ const localVue = createLocalVue();
 
 localVue.use(Vuex);
 
-const $store = new Vuex.Store({
-  modules: {
-    questions: {
-      namespaced: true,
-      state: {
-        index: 0,
-        score: 0,
-        questions: [],
-      },
-    },
-  },
-});
+let $store: any;
 
 let wrapper: any;
 
 describe('Component - ScoreScreen', () => {
   beforeEach(() => {
+    $store = new Vuex.Store({
+      modules: {
+        questions: {
+          namespaced: true,
+          state: {
+            index: 0,
+            score: 0,
+            questions: [],
+          },
+        },
+      },
+    });
     wrapper = shallowMount(ScoreScreen, {
       mocks: { $store },
       propsData: {
