@@ -29,14 +29,18 @@ const mountIt = (index = 0, score = 0, questions = []) => {
 };
 
 describe('Views - ScoreScreen', () => {
-  it('should redirect to home on index 0', () => {
-    mountIt();
+  beforeEach(() => {
+    jest.resetAllMocks();
+    jest.restoreAllMocks();
+  });
 
+  it('should redirect to home on index 0', () => {
     const routerMock = spyOn(router, 'push');
 
-    // Errored :(
-    // expect(routerMock).toBeCalledTimes(1);
-    // expect(routerMock).toBeCalledWith({ name: 'home' });
+    mountIt();
+
+    expect(routerMock).toBeCalledTimes(1);
+    expect(routerMock).toBeCalledWith({ name: 'home' });
   });
 
   it('should not redirect to home', () => {
