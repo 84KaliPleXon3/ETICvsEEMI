@@ -22,15 +22,17 @@ export default Vue.extend({
   name: 'Quiz',
   props: {},
   computed: {
-    ...mapGetters('schools', ['schools']),
-    ...mapGetters('questions', [
+    ...mapState('questions', [
       'questions',
       'index',
       'score',
+      ]),
+    ...mapGetters('questions', [
       'currentQuestion',
       'checkAnswer',
       'isLastQuestion',
     ]),
+    ...mapGetters('schools', ['schools']),
   },
   methods: {
     answer(answer: number): void {

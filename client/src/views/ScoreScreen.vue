@@ -21,7 +21,11 @@ export default Vue.extend({
     ScoreScreen,
   },
   computed: {
-    ...mapGetters('questions', ['index', 'questions', 'score']),
+    ...mapState('questions', [
+      'questions',
+      'index',
+      'score',
+      ]),
   },
   created(): void {
     if (this.index === 0) {
