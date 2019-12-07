@@ -2,12 +2,13 @@
   <div id="score_screen">
     <h2>Score: {{ score }}/{{ count }}</h2>
     <h3>{{ text() }}</h3>
-    <button class="replay-btn" @click="reset">Recommencer</button>
+    <button class="replay-btn" @click="resetGame">Recommencer</button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import router from '../router';
 
 interface IMessage {
   min: number;
@@ -29,13 +30,16 @@ export default Vue.extend({
   props: {
     score: Number,
     count: Number,
-    reset: Function,
   },
   methods: {
     text(): string {
       const text = this.messages.filter((msg) => this.score >= msg.min);
 
       return text[0] !== undefined ? text[0].msg : '';
+    },
+    resetGame(): void {
+      this.$store.dispatch('questions/resetState');
+      router.push({ name: 'home' });
     },
   },
   created(): void {

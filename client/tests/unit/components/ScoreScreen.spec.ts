@@ -1,6 +1,7 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import ScoreScreen from '../../../src/components/ScoreScreen.vue';
+import router from '@/router';
 
 const localVue = createLocalVue();
 
@@ -19,18 +20,19 @@ const $store = new Vuex.Store({
   },
 });
 
-const resetMock = jest.fn();
-
-const wrapper = shallowMount(ScoreScreen, {
-  mocks: { $store },
-  propsData: {
-    score: 2,
-    count: 5,
-    reset: resetMock,
-  },
-});
+let wrapper: any;
 
 describe('Component - ScoreScreen', () => {
+  beforeEach(() => {
+    wrapper = shallowMount(ScoreScreen, {
+      mocks: { $store },
+      propsData: {
+        score: 2,
+        count: 5,
+      },
+    });
+  });
+
   it('should display message based on score', () => {
     expect(wrapper.find('h3').text()).toBe(
       'Bon bah c\'est pas tip top tout ça.',
@@ -38,8 +40,15 @@ describe('Component - ScoreScreen', () => {
   });
 
   it('should call reset state function', () => {
+    const dispatchMock = spyOn($store, 'dispatch');
+    const routerMock = spyOn(router, 'push');
+
     wrapper.find('button.replay-btn').trigger('click');
 
-    expect(resetMock).toBeCalledTimes(1);
+    expect(dispatchMock).toBeCalledTimes(1);
+    expect(dispatchMock).toBeCalledWith('questions/resetState');
+
+    expect(routerMock).toBeCalledTimes(1);
+    expect(routerMock).toBeCalledWith({ name: 'home' });
   });
 });

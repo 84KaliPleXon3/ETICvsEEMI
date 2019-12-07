@@ -1,5 +1,5 @@
 <template>
-  <ScoreScreen :score="score" :count="questions.length" :reset="resetGame" />
+  <ScoreScreen :score="score" :count="questions.length" />
 </template>
 
 <script lang="ts">
@@ -11,21 +11,11 @@ import router from '../router';
 
 export default Vue.extend({
   name: 'home',
-  methods: {
-    resetGame(): void {
-      this.$store.dispatch('questions/resetState');
-      router.push({ name: 'home' });
-    },
-  },
   components: {
     ScoreScreen,
   },
   computed: {
-    ...mapState('questions', [
-      'questions',
-      'index',
-      'score',
-      ]),
+    ...mapState('questions', ['questions', 'index', 'score']),
   },
   created(): void {
     if (this.index === 0) {
