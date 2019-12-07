@@ -20,7 +20,6 @@ import IQuestion from '../models/question';
 
 export default Vue.extend({
   name: 'Quiz',
-  props: {},
   computed: {
     ...mapState('questions', [
       'questions',
