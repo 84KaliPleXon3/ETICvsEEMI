@@ -1,6 +1,7 @@
 # HÉTIC vs EEMI
 
 [![](https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/sundowndev/HETICvsEEMI/badge?ref=master)](https://github.com/sundowndev/HETICvsEEMI/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/00f7f24e54edd7ea0876/maintainability)](https://codeclimate.com/github/sundowndev/HETICvsEEMI/maintainability)
 [![](https://codecov.io/gh/sundowndev/HETICvsEEMI/branch/master/graph/badge.svg)](https://codecov.io/gh/sundowndev/HETICvsEEMI)
 
 Plus Eemien ou Héticien ? Le jeu qui ne fait pas rire les élèves.
