@@ -36,7 +36,6 @@ module.exports = {
   },
   collectCoverage: true,
   "collectCoverageFrom": [
-    "src/(components|views|utils)/**/*.(ts|vue)",
-    "src/store/modules/**/*.ts"
+    "src/(store|config|components|views|utils|models)/**/*.(ts|vue)"
   ]
 }
