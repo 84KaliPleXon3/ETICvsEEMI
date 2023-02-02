@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/sundowndev/HETICvsEEMI#readme",
   "devDependencies": {
-    "lerna": "^3.16.4"
+    "lerna": "^6.4.1"
   }
 }
